@@ -2,21 +2,23 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { AUTH_TOKEN } from '../../config/constants'
-import { timeDifferenceForDate } from "../../utils"
+import { timeDifferenceForDate, getData } from "../../utils"
 import * as mutation from "../../config/mutation"
 
 class Link extends Component {
   render() {
-    const authToken = localStorage.getItem(AUTH_TOKEN)
+    const authToken = getData(AUTH_TOKEN)
+    const { link } = this.props
     return (
       <div className="flex mt2 items-start">
         <div className="flex items-center">
           <span className="gray">{this.props.index + 1}.</span>
+          
           {authToken && (
             <Mutation 
               mutation={mutation.VOTE_MUTATION}
-              variables={{ linkId: this.props.link.id }}
-              update={(store, { data: { vote } }) => this.props.updateStoreAfterVote(store, vote, this.props.link.id)
+              variables={{ linkId: link.id }}
+              update={(store, { data: { vote } }) => this.props.updateStoreAfterVote(store, vote, link.id)
             }>
               {voteMutation => (
                 <div className="ml1 gray f11" onClick={voteMutation}>
@@ -28,15 +30,17 @@ class Link extends Component {
         </div>
         <div className="ml1">
           <div>
-            {this.props.link.description} ({this.props.link.url})
+            {link.description} ({link.url})
           </div>
+
           <div className="f6 lh-copy gray">
-            {this.props.link.votes.length} votes | by{' '}
-            {this.props.link.postedBy
-              ? this.props.link.postedBy.name
+            {link.votes.length} votes | by{' '}
+            {link.postedBy
+              ? link.postedBy.name
               : 'Unknown'}{' '}
-            {timeDifferenceForDate(this.props.link.createdAt)}
+            {timeDifferenceForDate(link.createdAt)}
           </div>
+
         </div>
       </div>
     )

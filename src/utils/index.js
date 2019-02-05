@@ -26,8 +26,20 @@ function timeDifference(current, previous) {
   }
 }
 
-export function timeDifferenceForDate(date) {
+export const timeDifferenceForDate = (date) => {
   const now = new Date().getTime()
   const updated = new Date(date).getTime()
   return timeDifference(now, updated)
+}
+
+export const saveData = (key, token) => {
+  localStorage.setItem(key, token) // Warning: Storing JWTs in localStorage is not a safe approach to implement authentication on the frontend. 
+}
+
+export const getData = (key) => {
+  return localStorage.getItem(key) 
+}
+
+export const removeData = (key) => {
+  return localStorage.removeItem(key) 
 }

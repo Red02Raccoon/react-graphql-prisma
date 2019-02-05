@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 
-import { AUTH_TOKEN } from '../../config/constants'
+import { AUTH_TOKEN, USER_NAME } from '../../config/constants'
 import * as mutation from "../../config/mutation"
+
+import { saveData } from '../../utils'
 
 
 class Login extends Component {
@@ -65,14 +67,14 @@ class Login extends Component {
   }
 
   _confirm = async data => {
-    const { token } = this.state.login ? data.login : data.signup
-    this._saveUserData(token)
+    const { token, user } = this.state.login ? data.login : data.signup
+
+    saveData(AUTH_TOKEN, token)
+    saveData(USER_NAME, user.name)
+
     this.props.history.push(`/`)
   }
 
-  _saveUserData = token => {
-    localStorage.setItem(AUTH_TOKEN, token) // Warning: Storing JWTs in localStorage is not a safe approach to implement authentication on the frontend. 
-  }
 }
 
 export default Login

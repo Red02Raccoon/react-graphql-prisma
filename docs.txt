@@ -1,3 +1,12 @@
 Tutorial:
  - https://www.howtographql.com/react-apollo/1-getting-started/
 
+# query
+# mutation
+# subscription - realtime updates
+# auth
+# fitering
+# pagination
+# http / ws
+
+'readQuery', 'writeQuery' always reads data from the local cache while 'query' might retrieve data either from the cache or remotely
