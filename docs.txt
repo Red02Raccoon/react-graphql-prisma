@@ -10,3 +10,6 @@ Tutorial:
 # http / ws
 
 'readQuery', 'writeQuery' always reads data from the local cache while 'query' might retrieve data either from the cache or remotely
+
+prisma.yml - is the main configuration file for your Prisma setup.
+datamodel.prisma - contains the definition of your datamodel. The Prisma datamodel defines your application’s models
